@@ -51,9 +51,9 @@ $result_sCat = $conn->query($sql_sCat);
 	<div class="section section-teams section-pad" id="team" style="padding-top: 40px; padding-bottom: 30px;">
 		<div class="container">
 			<div class="content row">
-				<div class="wide-md center" style="margin-bottom: 30px; margin-top: -50px;">
-					<h2 class="heading-section" style="font-size: 42px; font-weight: 700; color: #1e566f; margin-bottom: 8px; letter-spacing: 1px;">TEAM</h2>
-					<h5 class="heading-sm-lead" style="font-size: 18px; font-weight: 600; color: #666; letter-spacing: 2px; margin-top: 40px;">MANAGEMENT TEAM</h5>
+				<div class="wide-md center" style="margin-bottom: 30px;">
+					<h2 class="heading-section" style="font-size: 42px; font-weight: 700; color: #1e566f; margin-bottom: 20px; letter-spacing: 1px;">TEAM</h2>
+					<h5 class="heading-sm-lead" style="font-size: 18px; font-weight: 600; color: #666; letter-spacing: 2px; margin: 0 auto; margin-top: 4px;">MANAGEMENT TEAM</h5>
 				</div>
 
 				<div class="team-member-row row" style="margin-top: 20px;">
