@@ -1,4 +1,7 @@
 <?php
+// Set timezone for SMTP (required)
+date_default_timezone_set('Asia/Kolkata'); // Change to your timezone
+
 // Include Composer's autoloader to load PHPMailer
 require_once('php-mailer/PHPMailerAutoload.php');
 
@@ -59,11 +62,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $honeypot   = isset($_POST["form-anti-honeypot"]) ? $_POST["form-anti-honeypot"] : '';
 
         if ($honeypot == '' && !(empty($emailTO))) {
+            // Configure SMTP
+            // Option 1: Use Gmail SMTP (requires App Password from Google Account)
+            // Option 2: Use your domain's SMTP server (check with your hosting provider)
+            // Option 3: For local testing with XAMPP, you may need to configure sendmail or use mailtrap
+            
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com'; // Change to your SMTP server (e.g., smtp.infspl.com, mail.infspl.com)
+            $mail->SMTPAuth = true;
+            $mail->Username = 'contact@infspl.com'; // Your SMTP username/email
+            $mail->Password = 'your_smtp_password_here'; // Your SMTP password - UPDATE THIS with actual password
+            $mail->SMTPSecure = 'tls'; // Use 'ssl' if port is 465
+            $mail->Port = 587; // Use 465 for SSL, 587 for TLS
+            $mail->SMTPDebug = 0; // Set to 2 for debugging, 0 for production
+            $mail->SMTPOptions = array(
+                'ssl' => array(
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                    'allow_self_signed' => true
+                )
+            );
+            
             // Set email parameters
             $mail->isHTML(true);
             $mail->CharSet = 'UTF-8';
 
-            $mail->setFrom($qr_email, $sitename); // Set sender email and name
+            $mail->setFrom('contact@infspl.com', $sitename); // Use your domain email as sender
             $mail->addReplyTo($qr_email); // Add reply-to email
 
             // Add recipient emails
@@ -92,7 +116,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             if ($mail->send()) {
                 $response = array('result' => "success", 'message' => $msg_success);
             } else {
-                $response = array('result' => "error", 'message' => $mail->ErrorInfo);
+                // For debugging: show detailed error (remove in production)
+                $errorMsg = $mail->ErrorInfo;
+                // In production, use a generic message:
+                // $errorMsg = "Failed to send email. Please contact us directly.";
+                $response = array('result' => "error", 'message' => "Email sending failed: " . $errorMsg);
             }
             echo json_encode($response);
         } else {

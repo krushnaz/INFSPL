@@ -30,7 +30,7 @@ $result_clients = $conn->query($sql_clients);
 
 // get testimonials
 
-$sql_test = "SELECT * FROM testimonials WHERE language_id=169";
+$sql_test = "SELECT * FROM testimonials WHERE language_id=169 ORDER BY serial_number ASC";
 $result_test = $conn->query($sql_test);
 
 
@@ -148,135 +148,21 @@ $result_test = $conn->query($sql_test);
 			right: -40px;
 			font-size: 40px !important;
 		}
+
+		#slider.banner {
+			height: 70vh;
+			min-height: 500px;
+			max-height: 600px;
+		}
+
+		#slider .fill {
+			height: 100%;
+		}
 	</style>
 </head>
 
 <body class="site-body style-v1">
-	<!-- Header -->
-	<header class="site-header header-s1 is-sticky">
-		<!-- Topbar -->
-		<div class="topbar">
-			<div class="container">
-				<div class="row">
-					<div class="top-aside top-left">
-						<ul class="top-nav">
-							<li><a href="blog_category.php" style="color: #1e566f">Blogs</a></li>
-							<li><a href="career.php" style="color: #1e566f">Career</a></li>
-
-						</ul>
-					</div>
-					<div class="top-aside top-right clearfix">
-						<ul class="top-contact clearfix">
-							<li class="t-email t-email1">
-								<em class="fa fa-envelope-o" aria-hidden="true"></em>
-								<span><a href="#" style="color: #1e566f">contact@infspl.com</a></span>
-							</li>
-							<li class="t-phone t-phone1">
-								<em class="fa fa-phone" aria-hidden="true"></em>
-								<span style="color: #1e566f">+91 9921003190</span>
-							</li>
-						</ul>
-					</div>
-				</div>
-			</div>
-		</div>
-		<!-- #end Topbar -->
-		<!-- Navbar -->
-		<div class="navbar navbar-primary">
-
-			<div class="container">
-				<!-- Logo -->
-				<a class="navbar-brand" href="./">
-					<img class="logo logo-dark" alt="" src="image/logo.png" srcset="image/logo.png 4x" width="550px">
-					<img class="logo logo-light" alt="" src="image/logo.png" srcset="image/logo.png 4x">
-				</a>
-				<!-- #end Logo -->
-				<div class="navbar-header">
-					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#mainnav"
-						aria-expanded="false">
-						<span class="sr-only">Menu</span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-						<span class="icon-bar"></span>
-					</button>
-					<!-- Q-Button for Mobile -->
-					<div class="quote-btn"><a class="btn" href="get-a-quote.html">Sign in</a></div>
-				</div>
-				<!-- MainNav -->
-				<nav class="navbar-collapse collapse" id="mainnav">
-					<ul class="nav navbar-nav">
-						<li class="dropdown active"><a href="./">Home</a>
-							<!-- <ul class="dropdown-menu">
-								<li><a href="index.html">Home - Default</a></li>
-								<li><a href="index-v2.html">Home - Version 2</a></li>
-								<li><a href="index-v3.html">Home - Version 3</a></li>
-								<li><a href="index-v4.html">Home - Version 4</a></li>
-								<li><a href="index-static.html">Home - Image</a></li>
-							</ul> -->
-						</li>
-						<li class="dropdown"><a href="#who">About us<b class="caret"></b></a>
-							<ul class="dropdown-menu">
-
-								<li><a href="#who">Who are we </a></li>
-								<li><a href="#service">What we do</a></li>
-								<li><a href="#trust">Trust the best </a></li>
-								<li><a href="#team">Team</a></li>
-								<li><a href="#clients">Our Clients</a></li>
-								<li><a href="#test">Testimonials</a></li>
-								<li><a href="portfolio.php">Portfolio Company</a></li>
-								<li><a href="portfolio.php">Incubation Centers</a></li>
-
-
-								<!-- <ul class="dropdown-menu">
-										<li><a href="shortcode.html">Shortcode - Element</a></li>
-										<li><a href="shortcode-carousel.html">Shortcode - Carousel</a></li>
-										<li><a href="shortcode-banner.html">Shortcode - Banner</a></li>
-									</ul> -->
-
-								<!-- <li><a href="typography.html">Typography</a></li> -->
-							</ul>
-						</li>
-						<li class="dropdown">
-							<a href="#" class="dropdown-toggle">Services <b class="caret"></b></a>
-							<ul class="dropdown-menu">
-
-								<?php
-
-
-								$sql_cat = "SELECT * FROM scategories WHERE language_id=169";
-								$result_cat = $conn->query($sql_cat);
-
-
-								if ($result_cat->num_rows > 0) {
-									// Output data of each row
-								
-									while ($row_cat = $result_cat->fetch_assoc()) {
-										$id1 = $row_cat['id'];
-
-										$name = $row_cat['name'];
-
-										echo "<li><a href='service-starup.php?id=$id1'>$name</a></li>";
-
-
-									}
-								} else {
-									echo "0 results";
-								}
-								?>
-
-
-							</ul>
-						</li>
-
-						<li><a href="gallery.php">Gallery</a></li>
-						<li><a href="#awards">Awards</a></li>
-						<li class="quote-btn"><a class="btn" href="contact.php">Contact Us</a></li>
-					</ul>
-				</nav>
-				<!-- #end MainNav -->
-			</div>
-		</div>
-		<!-- #end Navbar -->
+	<?php include 'header.php'; ?>
 		<!-- Banner/Slider -->
 		<div id="slider" class="banner banner-slider carousel ">
 
@@ -308,8 +194,8 @@ $result_test = $conn->query($sql_test);
 							<div class='container'>
 								<div class='row'>
 									<div class='banner-text al-left pos-left light'>
-										<h2 style='color: #1e566f;'><strong>$hero_title</strong></h2>
-										<p style='color: #1e566f; fontsize: 18px;'>$hero_text</p>
+										<h2 style='color: #1e566f; font-size: 2em;'><strong>$hero_title</strong></h2>
+										<p style='color: #1e566f; font-size: 18px;'>$hero_text</p>
 										<a href=$hero_button_url class='btn'>$hero_button_text</a>
 									</div>
 								</div>
@@ -343,13 +229,13 @@ $result_test = $conn->query($sql_test);
 	<!-- End Header -->
 
 	<!-- Service Section -->
-	<div class='section section-services'>
+	<div class='section section-services' style="padding-top: 60px; padding-bottom: 60px;">
 		<div class='container'>
 			<div class='content row'>
 				<!-- Feature Row  -->
 				<div class='feature-row feature-service-row row feature-s4 off-text boxed-w'>
 				
-					<div class='heading-box' id="services">
+					<div class='heading-box' id="services" style="margin-bottom: 40px;">
 						<div>
 							<center>
 								<h2 class='heading-section'>OUR SERVICES
@@ -485,7 +371,7 @@ $result_test = $conn->query($sql_test);
 	<!-- End Section -->
 
 	<!-- Content -->
-	<div class="section section-content section-pad" id="who">
+	<div class="section section-content section-pad" id="who" style="padding-top: 60px; padding-bottom: 60px;">
 		<div class="container">
 			<div class="content row">
 
@@ -529,10 +415,8 @@ $result_test = $conn->query($sql_test);
 	</div>
 	<!-- End Content -->
 
-
 	<!-- Content -->
-
-	<div class="section section-contents section-pad image-on-right bg-light" id="service">
+	<div class="section section-contents section-pad image-on-right bg-light" id="service" style="padding-top: 60px; padding-bottom: 60px;">
 		<div class="container">
 			<div class="row">
 
@@ -597,7 +481,7 @@ $result_test = $conn->query($sql_test);
 	<!-- End Content -->
 
 	<!-- Content -->
-	<div class="section section-contents section-pad light bg-alternet" id="trust">
+	<div class="section section-contents section-pad light bg-alternet" id="trust" style="padding-top: 60px; padding-bottom: 60px;">
 		<div class="container">
 			<div class="row">
 
@@ -653,65 +537,6 @@ $result_test = $conn->query($sql_test);
 
 
 
-	<!-- Teams -->
-<div class="section section-teams section-pad bdr-bottom" id="team">
-	<div class="container">
-		<div class="content row">
-
-			<h5 class="heading-sm-lead center">STRATEGY & MANAGEMENT</h5>
-			<h2 class="heading-section center">TEAM</h2>
-
-			<div class="gaps"></div>
-			<div class="team-member-row row">
-
-				<?php
-				if ($result_members->num_rows > 0) {
-					while ($row = $result_members->fetch_assoc()) {
-						$id2 = $row['id'];
-						$team_img = $row['image'];
-						$team_path = 'members/';
-						$img_team_path = $img_path . $team_path . $team_img;
-						$team_name = $row['name'];
-						$team_rank = $row['rank'];
-						$team_linkedIn = $row['linkedin'];
-
-						$team_odd_even = ($id2 % 2 == 0) ? 'even' : 'odd';
-
-						echo "
-						<div class='col-md-4 col-sm-6 col-xs-6 $team_odd_even'>
-							<!-- Team Profile -->
-							<div class='team-member' style='text-align:center; margin-top:40px;'>
-								<div class='team-photo' 
-									style='width:250px; height:250px; margin:0 auto; overflow:hidden; border-radius:50%; 
-									border:4px solid #fff; box-shadow:0 0 12px rgba(0,0,0,0.15);'>
-									
-									<img alt='' src='$img_team_path' 
-										style='width:100%; height:100%; object-fit:cover; object-position:top; border-radius:50%; 
-										transition:transform 0.3s ease;'>
-								</div>
-								
-								<div class='team-info center' style='margin-top:15px;'>
-									<h4 class='name' style='color:#40454b; margin-bottom:5px;'>
-										<a href='teams.php?id=$id2#$id2' style='color:inherit; text-decoration:none;'>$team_name</a>
-									</h4>
-									<p class='sub-title' style='font-size:0.9em; color:#a5abb2;'>$team_rank</p>
-								</div>
-							</div>
-							<!-- Team #end -->
-						</div>
-						";
-					}
-				} else {
-					echo "<p class='center'>No team members found.</p>";
-				}
-				?>
-			</div><!-- TeamRow #end -->
-		</div>
-	</div>
-</div>
-<!-- End Section -->
-
-
 
 	<!-- <div class="section section-logos section-pad-sm bg-light bdr-top" id="incubation">
 		<div class="container">
@@ -739,10 +564,8 @@ $result_test = $conn->query($sql_test);
 	<div class="section section-news section-pad" id="clients">
 		<div class="container">
 			<div class="content row">
-
 				<h5 class="heading-sm-lead center">Some of our</h5>
 				<h2 class="heading-section center"> Clients</h2>
-
 			</div>
 		</div>
 	</div>
@@ -750,9 +573,7 @@ $result_test = $conn->query($sql_test);
 
 	<!-- Client logo -->
 	<div class="section section-pad bg-light" id="test">
-
 		<div class="content row">
-
 			<div class="logo-carousel">
 				<?php
 				if ($result_clients->num_rows > 0) {
@@ -762,19 +583,13 @@ $result_test = $conn->query($sql_test);
 						$client_path = 'partners/';
 						$img_client_path = $img_path . $client_path . $client_img;
 
-
-						echo "<a href=$client_url target=”_blank” ><img src=$img_client_path width='500' height='600''
-							height: 'auto;'></a>";
-
+						echo "<a href='$client_url' target='_blank'><img src='$img_client_path' width='500' height='600' alt='Client Logo'></a>";
 					}
 				} else {
 					echo "0 results";
 				}
-
 				?>
-
 				<!-- End Slide -->
-
 			</div>
 			<!-- End Slides -->
 
@@ -787,15 +602,10 @@ $result_test = $conn->query($sql_test);
 	<!-- End Section -->
 
 	<!-- Testimonials -->
-	<div class="section section-quotes section-pad">
+	<div class="section section-quotes section-pad" style="padding-top: 40px; padding-bottom: 40px;">
 		<div class="container">
 			<div class="content row">
-
-
-
-				<h2 class="heading-section center">Testimonials</h2>
-
-				<div class="gaps"></div>
+				<h2 class="heading-section center" style="margin-bottom: 30px;">Testimonials</h2>
 				<div class="testimonials">
 					<div id="testimonial" class="quotes-slider col-md-8 col-md-offset-2">
 						<div class="owl-carousel loop has-carousel" data-items="1" data-loop="true" data-dots="true"
@@ -819,7 +629,7 @@ $result_test = $conn->query($sql_test);
 											<p>$test_comment</p>
 										</div>
 										<div class='profile'>
-											<img src=$img_portfolio_path alt=''>
+											<img src=$img_portfolio_path alt='$test_name' style='max-width: 140px; width: 100%; height: auto; min-height: 60px; object-fit: contain; border-radius: 8px; border: 3px solid #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.2); display: block; margin: 0 auto 15px;'>
 											<h5>$test_name</h5>
 											<h6>$test_rank
 											</h6>
@@ -849,16 +659,14 @@ $result_test = $conn->query($sql_test);
 	<!-- End Section -->
 
 	<!-- Awards -->
-	<div class="section section-quotes section-pad light" style="height:80%;" id="awards">
+	<div class="section section-quotes section-pad light" style="height:80%; padding-top: 40px; padding-bottom: 40px;" id="awards">
 		<div class="container">
 			<div class="content row">
-
-				<h2 class="heading-md-lead center" style="color:black">Awards</h2>
-				<div class="gaps size-sm"></div>
+				<h2 class="heading-md-lead center" style="color:black; margin-bottom: 30px;">Awards</h2>
 				<div class="testimonials center">
 					<div id="testimonial" class="quotes-slider">
 						<div class="owl-carousel loop has-carousel" data-items="2" data-loop="true" data-dots="true"
-							data-auto="true">
+							data-auto="true" data-delay="500">
 							<div class='item'>
 								<!-- Each Quotes -->
 								<div class='quotes'>
@@ -953,112 +761,7 @@ $result_test = $conn->query($sql_test);
 	</div>
 	<!-- End Section -->
 
-	<!-- Footer Widget-->
-	<div class="footer-widget style-v2 section-pad-md">
-		<div class="container">
-			<div class="row">
-
-				<div class="widget-row row">
-					<div class="footer-col col-md-3 col-sm-6 res-m-bttm">
-						<!-- Each Widget -->
-						<div class="wgs wgs-footer wgs-text">
-							<div class="wgs-content">
-								<p><img src="image/logo.png" srcset="image/logo.png 2x" alt=""></p>
-								
-								<p></p>INFSPL is a Business Growth Strategists and an Investment Banking Company providing services for StartUp, MSME & Large Enterprise.
-								</p>
-							</div>
-						</div>
-						<!-- End Widget -->
-					</div>
-					<div class="footer-col col-md-3 col-sm-6 col-md-offset-1 res-m-bttm">
-						<!-- Each Widget -->
-						<div class="wgs wgs-footer wgs-menu">
-							<h5 class="wgs-title">Our Services</h5>
-							<div class="wgs-content">
-								<ul class="menu">
-									<li><a href="service-starup.php?id=59">Startup</a></li>
-									<li><a href="service-starup.php?id=60">MSME</a></li>
-									<li><a href="service-starup.php?id=61">Large Enterprise</a></li>
-
-								</ul>
-							</div>
-						</div>
-						<!-- End Widget -->
-					</div>
-					<div class="footer-col col-md-2 col-sm-6 res-m-bttm">
-						<!-- Each Widget -->
-						<div class="wgs wgs-footer wgs-menu">
-							<h5 class="wgs-title">Quick Links</h5>
-							<div class="wgs-content">
-								<ul class="menu">
-									<li><a href="index.php">Home</a></li>
-									<li><a href="#who">About Us</a></li>
-									<li><a href="teams.php">Team</a></li>
-									<li><a href="contact.php">Contact Us</a></li>
-									<li><a href="career.php">Career</a></li>
-									<li><a href="forms.php">Forms</a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- End Widget -->
-					</div>
-
-					<div class="footer-col col-md-3 col-sm-6">
-						<!-- Each Widget -->
-						<div class="wgs wgs-footer">
-							<h5 class="wgs-title">Get In Touch</h5>
-							<div class="wgs-content">
-								198 City Hub,<br>
-									3rd Floor, Office No – 311,<br>
-									Sankar Nanasaheb Karpe Rd,<br>
-									Bodke Wada, New Nana Peth,<br>
-									Ganesh Peth, Pune-411002, Maharashtra, India<br>
-								
-									<em class="fa fa-envelope-o" aria-hidden="true"></em>
-									<span><a href="#" style="color: #1e566f">contact@infspl.com</a></span><br>
-								
-									<!-- <span>Toll Free</span>: (1-800) 234 5678<br> -->
-									<span>Phone</span>: +91 9921003190
-							
-								<ul class="social">
-									<li><a href="https://www.facebook.com/intellectualservices03"><em
-												class="fa fa-facebook" aria-hidden="true"></em></a></li>
-									<li><a href="https://mobile.twitter.com/infspl"><em class="fa fa-twitter"
-												aria-hidden="true"></em></a></li>
-									<li><a
-											href="https://www.linkedin.com/company/intellectual-investments-financial-services"><em
-												class="fa fa-linkedin" aria-hidden="true"></em></a></li>
-								</ul>
-							</div>
-						</div>
-						<!-- End Widget -->
-					</div>
-
-				</div><!-- Widget Row -->
-
-			</div>
-		</div>
-	</div>
-	<!-- End Footer Widget -->
-
-	<!-- Copyright -->
-	<div class="copyright style-v2">
-		<div class="container">
-			<div class="row">
-
-				<div class="row">
-					<div class="site-copy col-sm-7">
-						<p>&copy; 2024 Intellectual Investments & Financial Services Pvt. Ltd. <a href="#">All Rights
-								Reserved</a></p>
-					</div>
-
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<!-- End Copyright -->
+	<?php include 'footer.php'; ?>
 
 	<!-- Rreload Image for Slider -->
 	<div class="preload hide">
