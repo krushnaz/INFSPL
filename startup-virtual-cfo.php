@@ -64,17 +64,84 @@ if ($result_services->num_rows > 0) {
 	<link rel="stylesheet" type="text/css" href="css/vendor.bundle.css">
 	<link id="style-css" rel="stylesheet" type="text/css" href="css/style.css">
 	<style>
-		.service-content,
-		.service-content p,
-		.service-content div,
-		.service-content p.MsoNormal,
-		.service-content * {
-			text-align: justify !important;
-		}
-		.service-content p,
-		.service-content div {
-			line-height: 1.8 !important;
-		}
+    .service-content {
+        max-width: 900px;
+        margin: 0 auto 2.5rem;
+        font-size: 16px;
+        line-height: 1.8;
+        text-align: justify;
+        color: #3a3a3a;
+    }
+
+    .service-content p,
+    .service-content div,
+    .service-content p.MsoNormal {
+        margin-bottom: 1em;
+        line-height: 1.8 !important;
+        text-align: justify !important;
+    }
+
+    .service-content ul,
+    .service-content ol {
+        margin: 0 0 1.2em 1.8em;
+        padding-left: 0;
+        text-align: left !important;
+    }
+
+    .service-content li {
+        margin-bottom: 0.6em;
+        text-align: left !important;
+    }
+
+    .service-content * {
+        word-break: break-word;
+    }
+
+    .service-listing {
+        padding: 60px 0;
+    }
+
+    .service-listing h2 {
+        text-align: center;
+        margin-bottom: 35px;
+        color: #ffffff;
+    }
+
+    .service-listing .service-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px 35px;
+        max-width: 960px;
+        margin: 0 auto;
+    }
+
+    .service-listing .service-grid a {
+        color: #ffffff;
+        font-weight: 400;
+        text-decoration: none;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 6px 4px;
+    }
+
+    .service-listing .service-grid a:hover {
+        color: #f3c669;
+        text-decoration: underline;
+    }
+
+    .service-listing .service-grid .service-icon {
+        font-size: 28px;
+        line-height: 1;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: #ffffff;
+    }
+
+    .service-listing .service-grid a:hover .service-icon {
+        color: #f3c669;
+    }
 	</style>
 </head>
 
@@ -113,7 +180,7 @@ if ($result_services->num_rows > 0) {
 					<?php echo $service_name; ?>
 				</h2>
 
-				<div class="service-content" style="text-align: justify; line-height: 1.8; font-size: 16px;">
+			<div class="service-content">
 					<?php echo $serial_content; ?>
 				</div>
 
@@ -252,56 +319,37 @@ if ($result_services->num_rows > 0) {
 	</div> -->
 	<!-- End Section -->
 	<!-- Content with Parallax -->
-	<div class="section section-contents section-pad has-bg has-parallax light"
-		style="background-image: url('image/other services.jpg');">
-		<div class="container">
-			<div class="content row">
+    <div class="section service-listing section-pad has-bg has-parallax light"
+        style="background-image: url('image/other services.jpg');">
+        <div class="container">
+            <div class="content row">
 
-				<h2><?php echo $category_name; ?> Services:</h2>
-				<div class="row">
+                <h2><?php echo $category_name; ?> Services</h2>
 
+                <div class="service-grid">
+                    <?php
+                    $sql_service = "SELECT * FROM services WHERE scategory_id=$cat_id AND language_id=169 ORDER BY serial_number";
+                    $result_service = $conn->query($sql_service);
 
+                    if ($result_service->num_rows > 0) {
+                        // Output data of each row
+                        while ($row_service = $result_service->fetch_assoc()) {
+                            $service_id = $row_service['id'];
+                            $service_name = $row_service['title'];
 
+                            $url = 'startup-virtual-cfo.php?id=' . $service_id . '&cat_id=' . $cat_id;
 
-					<?php
+                            echo "<a href='$url'><span class='service-icon'>&rsaquo;</span><span>$service_name</span></a>";
+                        }
+                    } else {
+                        echo "<p style='text-align:center; color:#fff;'>No related services found.</p>";
+                    }
+                    ?>
+                </div>
 
-					$sql_service = "SELECT * FROM services WHERE scategory_id=$cat_id AND language_id=169 ORDER BY serial_number";
-					$result_service = $conn->query($sql_service);
-
-					if ($result_service->num_rows > 0) {
-						// Output data of each row
-						while ($row_service = $result_service->fetch_assoc()) {
-							$service_id = $row_service['id'];
-							$service_name = $row_service['title'];
-
-
-							$url = 'startup-virtual-cfo.php?id=' . $service_id . '&cat_id=' . $cat_id;
-
-							echo " <div class='col-sm-3'>
-							<ul class='list-style'>
-								<li><a href=$url style='color: white;'>$service_name</a></li>
-								
-								
-							
-							</ul>
-						</div>
-							
-							
-							
-							";
-
-						}
-					} else {
-						echo "0 results";
-					}
-					?>
-
-
-				</div>
-
-			</div>
-		</div>
-	</div>
+            </div>
+        </div>
+    </div>
 	<!-- End Section -->
 
 
