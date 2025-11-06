@@ -64,14 +64,25 @@ if ($result_services->num_rows > 0) {
 	<link rel="stylesheet" type="text/css" href="css/vendor.bundle.css">
 	<link id="style-css" rel="stylesheet" type="text/css" href="css/style.css">
 	<style>
-    .service-content {
-        max-width: 900px;
-        margin: 0 auto 2.5rem;
-        font-size: 16px;
-        line-height: 1.8;
-        text-align: justify;
-        color: #3a3a3a;
-    }
+	.service-detail-container {
+		max-width: 900px;
+		margin: 0 auto;
+	}
+
+	.service-detail-container .heading-lg {
+		text-align: center;
+		margin-bottom: 2rem;
+		color: #1f2d3d;
+		font-size: 30px;
+		line-height: 1.3;
+	}
+
+	.service-content {
+		font-size: 16px;
+		line-height: 1.8;
+		text-align: justify;
+		color: #3a3a3a;
+	}
 
     .service-content p,
     .service-content div,
@@ -176,12 +187,14 @@ if ($result_services->num_rows > 0) {
 		<div class="container">
 			<div class="content row">
 
-				<h2 class="heading-lg">
-					<?php echo $service_name; ?>
-				</h2>
+				<div class="service-detail-container">
+					<h2 class="heading-lg">
+						<?php echo $service_name; ?>
+					</h2>
 
-			<div class="service-content">
-					<?php echo $serial_content; ?>
+					<div class="service-content">
+						<?php echo $serial_content; ?>
+					</div>
 				</div>
 
 					<!-- <ul class="list-style dots style-v2">
