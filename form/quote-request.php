@@ -1,133 +1,142 @@
 <?php
-// Set timezone for SMTP (required)
-date_default_timezone_set('Asia/Kolkata'); // Change to your timezone
+// ✅ Enable error reporting for debugging
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 
-// Include Composer's autoloader to load PHPMailer
+// ✅ Set JSON content type
+header('Content-Type: application/json');
+
+// ✅ Set timezone
+date_default_timezone_set('Asia/Kolkata');
+
+// ✅ Include PHPMailer (v5.x)
+if (!file_exists('php-mailer/PHPMailerAutoload.php')) {
+    echo json_encode(['result' => 'error', 'message' => 'PHPMailer library not found at: php-mailer/PHPMailerAutoload.php']);
+    exit;
+}
+
 require_once('php-mailer/PHPMailerAutoload.php');
 
-// Create a new PHPMailer instance
+// ✅ Create mail instance
 $mail = new PHPMailer();
 
-// Define email variables
-$emailTO = array(
-    array('email' => 'contact@infspl.com', 'name' => 'Your Name')
-);
+// ✅ Email recipient
+$emailTO = [
+    ['email' => 'contact@infspl.com', 'name' => 'INFSPL Enquiry']
+];
 
-// Enter Email Subject
-$sitename = 'Your Site Name';
+// ✅ Site info
+$sitename = 'INFSPL';
 
-// Start the session
+// ✅ Start session (optional but useful)
 session_start();
 
-if(isset($_POST["quote-request-name"]) && $_POST["quote-request-name"] != '') {
-    // Retrieve the contact name from the form
+// ✅ Get subject
+if (isset($_POST["quote-request-name"]) && $_POST["quote-request-name"] != '') {
     $contact_name = $_POST["quote-request-name"];
-
-    // Combine contact name and site name for email subject
     $subject = "New Message Received from $contact_name";
 } else {
-    // If contact name is not provided, use default subject
     $subject = "New Message Received from $sitename";
 }
 
-$taskOptionMapping = array(
+// ✅ Category mapping
+$taskOptionMapping = [
     '59' => 'Start Up',
     '60' => 'MSME',
     '61' => 'Large Enterprises',
-    // Add more mappings as needed
-);
-// Success Messages
+];
+
+// ✅ Success message
 $msg_success = "We have successfully received your request. We'll get back to you soon.";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST["quote-request-email"]) && $_POST["quote-request-email"] != '' && isset($_POST["quote-request-name"]) && $_POST["quote-request-name"] != '') {
+
+    if (!empty($_POST["quote-request-email"]) && !empty($_POST["quote-request-name"])) {
+
+        // ✅ Get form data
         $qr_email   = $_POST["quote-request-email"];
         $qr_name    = $_POST["quote-request-name"];
-
-        $qr_phone   = isset($_POST["quote-request-phone"]) ? $_POST["quote-request-phone"] : '';
-        $qr_company = isset($_POST["quote-request-company"]) ? $_POST["quote-request-company"] : '';
-        $qr_reach   = isset($_POST["quote-request-reach"]) ? $_POST["quote-request-reach"] : '';
-        $qr_hear    = isset($_POST["quote-request-hear"]) ? $_POST["quote-request-hear"] : '';
+        $qr_phone   = $_POST["quote-request-phone"] ?? '';
+        $qr_company = $_POST["quote-request-company"] ?? '';
+        $qr_reach   = $_POST["quote-request-reach"] ?? '';
+        $qr_hear    = $_POST["quote-request-hear"] ?? '';
         $qr_category_id = isset($_POST["taskOption"]) ? explode('_', $_POST["taskOption"])[0] : '';
-        $qr_category = isset($taskOptionMapping[$qr_category_id]) ? $taskOptionMapping[$qr_category_id] : '';
+        $qr_category = $taskOptionMapping[$qr_category_id] ?? '';
 
-        $qr_interest = isset($_POST["quote-request-interest"]) ? $_POST["quote-request-interest"] : array();
+        $qr_interest = $_POST["quote-request-interest"] ?? [];
         if (!is_array($qr_interest)) {
-            $qr_interest = array($qr_interest);
+            $qr_interest = [$qr_interest];
         }
         $qr_interested = implode(', ', $qr_interest);
+        $qr_message = $_POST["quote-request-message"] ?? '';
+        $honeypot = $_POST["form-anti-honeypot"] ?? '';
 
-        $qr_message = isset($_POST["quote-request-message"]) ? $_POST["quote-request-message"] : '';
+        // ✅ Proceed only if honeypot empty
+        if ($honeypot == '' && !empty($emailTO)) {
 
-        $honeypot   = isset($_POST["form-anti-honeypot"]) ? $_POST["form-anti-honeypot"] : '';
-
-        if ($honeypot == '' && !(empty($emailTO))) {
-            // Configure SMTP
-            // Option 1: Use Gmail SMTP (requires App Password from Google Account)
-            // Option 2: Use your domain's SMTP server (check with your hosting provider)
-            // Option 3: For local testing with XAMPP, you may need to configure sendmail or use mailtrap
-            
+            // ✅ Gmail SMTP configuration
             $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com'; // Change to your SMTP server (e.g., smtp.infspl.com, mail.infspl.com)
+            $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
-            $mail->Username = 'contact@infspl.com'; // Your SMTP username/email
-            $mail->Password = 'your_smtp_password_here'; // Your SMTP password - UPDATE THIS with actual password
-            $mail->SMTPSecure = 'tls'; // Use 'ssl' if port is 465
-            $mail->Port = 587; // Use 465 for SSL, 587 for TLS
-            $mail->SMTPDebug = 0; // Set to 2 for debugging, 0 for production
-            $mail->SMTPOptions = array(
-                'ssl' => array(
+            $mail->Username = 'contact@infspl.com';
+            $mail->Password = 'vmiy vdmg bjek fgwd';
+            $mail->SMTPSecure = 'ssl'; // For PHPMailer v5: use 'ssl' for port 465, 'tls' for port 587
+            $mail->Port = 465;
+            $mail->SMTPDebug = 0;
+            $mail->CharSet = 'UTF-8';
+
+            $mail->SMTPOptions = [
+                'ssl' => [
                     'verify_peer' => false,
                     'verify_peer_name' => false,
                     'allow_self_signed' => true
-                )
-            );
-            
-            // Set email parameters
-            $mail->isHTML(true);
-            $mail->CharSet = 'UTF-8';
+                ]
+            ];
 
-            $mail->setFrom('contact@infspl.com', $sitename); // Use your domain email as sender
-            $mail->addReplyTo($qr_email); // Add reply-to email
-
-            // Add recipient emails
+            // ✅ Set From and Recipient
+            $mail->setFrom('krishnazarekar72@gmail.com', 'INFSPL Website');
+            $mail->addReplyTo($qr_email, $qr_name);
             foreach ($emailTO as $to) {
                 $mail->addAddress($to['email'], $to['name']);
             }
 
-            // Customized message
-            $emailBody = "
-                Hello,\n\n
-                You have received a new message from your website.\n\n
-                Here are the details:\n\n
-                Name: $qr_name\n
-                Email: $qr_email\n
-                Phone: $qr_phone\n
-                Company: $qr_company\n
-                Services Category:  $qr_category\n
-                Services :   $qr_interested\n
-                Time to Reach: $qr_reach\n
-                Hear From: $qr_hear\n
-                Message: $qr_message\n
-            ";
+            // ✅ HTML email body
+            $mail->isHTML(true);
             $mail->Subject = $subject;
-            $mail->Body = $emailBody;
+            $mail->Body = "
+                <h2>New Website Enquiry</h2>
+                <p><strong>Name:</strong> $qr_name</p>
+                <p><strong>Email:</strong> $qr_email</p>
+                <p><strong>Phone:</strong> $qr_phone</p>
+                <p><strong>Company:</strong> $qr_company</p>
+                <p><strong>Category:</strong> $qr_category</p>
+                <p><strong>Services:</strong> $qr_interested</p>
+                <p><strong>Time to Reach:</strong> $qr_reach</p>
+                <p><strong>Heard From:</strong> $qr_hear</p>
+                <p><strong>Message:</strong><br>$qr_message</p>
+            ";
 
-            if ($mail->send()) {
-                $response = array('result' => "success", 'message' => $msg_success);
-            } else {
-                // For debugging: show detailed error (remove in production)
-                $errorMsg = $mail->ErrorInfo;
-                // In production, use a generic message:
-                // $errorMsg = "Failed to send email. Please contact us directly.";
-                $response = array('result' => "error", 'message' => "Email sending failed: " . $errorMsg);
+            // ✅ Send email
+            try {
+                if ($mail->send()) {
+                    echo json_encode(['result' => "success", 'message' => $msg_success]);
+                } else {
+                    echo json_encode(['result' => "error", 'message' => "Email sending failed: " . $mail->ErrorInfo]);
+                }
+            } catch (\Exception $e) {
+                echo json_encode(['result' => "error", 'message' => "Exception: " . $e->getMessage() . " | Mail Error: " . $mail->ErrorInfo]);
             }
-            echo json_encode($response);
+
         } else {
-            echo json_encode(array('result' => "error", 'message' => "Bot detected! Please try later."));
+            echo json_encode(['result' => "error", 'message' => "Bot detected! Please try later."]);
         }
+
     } else {
-        echo json_encode(array('result' => "error", 'message' => "Please fill up all required fields and try again."));
+        echo json_encode(['result' => "error", 'message' => "Please fill all required fields and try again."]);
     }
+} else {
+    echo json_encode(['result' => "error", 'message' => "Invalid request method."]);
 }
+exit;
 ?>
+

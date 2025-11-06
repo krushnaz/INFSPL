@@ -1,0 +1,4 @@
+[06-Nov-2025 16:51:27 Asia/Kolkata] PHP Fatal error:  Uncaught Error: Undefined constant PHPMailer::ENCRYPTION_SMTPS in C:\xampp\htdocs\infspl\form\quote-request.php:103
+Stack trace:
+#0 {main}
+  thrown in C:\xampp\htdocs\infspl\form\quote-request.php on line 103
