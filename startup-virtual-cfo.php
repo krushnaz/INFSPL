@@ -374,9 +374,7 @@ if ($result_services->num_rows > 0) {
 
 					<div class="cta-sameline">
 						<h2>Have any Question?</h2>
-						<p>We're here to help. Send us an email or call us at +91 9921003190. Please feel free to
-							contact
-							our expert.</p>
+						<p>We're here to help. Send us an email or call us at +91 9921003190.</p>
 						<a class="btn btn-alt" href="contact.php">Contact Us</a>
 					</div>
 
