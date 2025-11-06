@@ -110,6 +110,12 @@ if ($result_services->num_rows > 0) {
 
     .service-listing {
         padding: 60px 0;
+        background-size: cover !important;
+        background-position: center center !important;
+        background-repeat: no-repeat !important;
+        background-attachment: scroll !important;
+        position: relative;
+        min-height: 300px;
     }
 
     .service-listing h2 {
