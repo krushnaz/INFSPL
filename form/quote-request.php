@@ -94,7 +94,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             ];
 
             // ✅ Set From and Recipient
-            $mail->setFrom('krishnazarekar72@gmail.com', 'INFSPL Website');
+            $mail->setFrom('contact@infspl.com', 'INFSPL Website');
             $mail->addReplyTo($qr_email, $qr_name);
             foreach ($emailTO as $to) {
                 $mail->addAddress($to['email'], $to['name']);
