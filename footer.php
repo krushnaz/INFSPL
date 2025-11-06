@@ -87,7 +87,7 @@
 			<div class="row">
 				<div class="site-copy col-sm-7">
 					<p>&copy; 2025 Intellectual Investments & Financial Services Pvt. Ltd. <a href="#">All Rights
-							Reserved</a></p>
+							Reserved 1234</a></p>
 				</div>
 			</div>
 		</div>
