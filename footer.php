@@ -59,7 +59,7 @@
 							</p>
 							<p style="margin: 10px 0;">
 								<em class="fa fa-phone" aria-hidden="true" style="margin-right: 8px;"></em>
-								<span>+91 9921003190</span>
+								<span>+91 8855815433</span>
 							</p>
 							<ul class="social">
 								<li><a href="https://www.facebook.com/intellectualservices03"><em
