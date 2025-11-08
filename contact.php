@@ -231,12 +231,6 @@ $img_path = 'https://infspl.com/development/assets/front/img/';
 									</select>
 								</div>
 							</div>
-							<div class="form-group row">
-								<div class="form-field col-md-12">
-									<textarea name="quote-request-message" placeholder="Any Message Or Comment For Us"
-										class="txtarea form-control"></textarea>
-								</div>
-							</div>
 							<input type="text" class="hidden" name="form-anti-honeypot" value="">
 							<button type="submit" class="btn" value="submit" name="submit">Submit</button>
 							<div class="form-results"></div>

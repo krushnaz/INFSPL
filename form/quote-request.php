@@ -68,7 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $qr_interest = [$qr_interest];
         }
         $qr_interested = implode(', ', $qr_interest);
-        $qr_message = $_POST["quote-request-message"] ?? '';
         $honeypot = $_POST["form-anti-honeypot"] ?? '';
 
         // ✅ Proceed only if honeypot empty
@@ -113,7 +112,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <p><strong>Services:</strong> $qr_interested</p>
                 <p><strong>Time to Reach:</strong> $qr_reach</p>
                 <p><strong>Heard From:</strong> $qr_hear</p>
-                <p><strong>Message:</strong><br>$qr_message</p>
             ";
 
             // ✅ Send email
