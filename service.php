@@ -356,7 +356,7 @@ if ($result_services->num_rows > 0) {
                             $service_id = $row_service['id'];
                             $service_name = $row_service['title'];
 
-                            $url = 'startup-virtual-cfo.php?id=' . $service_id . '&cat_id=' . $cat_id;
+                            $url = 'service.php?id=' . $service_id . '&cat_id=' . $cat_id;
 
                             echo "<a href='$url'><span class='service-icon'>&rsaquo;</span><span>$service_name</span></a>";
                         }
