@@ -20,9 +20,9 @@
 						<h5 class="wgs-title">Our Services</h5>
 						<div class="wgs-content">
 							<ul class="menu">
-								<li><a href="service-starup.php?id=59">Startup</a></li>
-								<li><a href="service-starup.php?id=60">MSME</a></li>
-								<li><a href="service-starup.php?id=61">Large Enterprise</a></li>
+								<li><a href="services.php?id=59">Startup</a></li>
+								<li><a href="services.php?id=60">MSME</a></li>
+								<li><a href="services.php?id=61">Large Enterprise</a></li>
 							</ul>
 						</div>
 					</div>
@@ -94,4 +94,88 @@
 	</div>
 </div>
 <!-- End Copyright -->
+
+<!-- Floating Call and WhatsApp Icons -->
+<style>
+	.floating-call-icon {
+		position: fixed;
+		right: 20px;
+		bottom: 95px;
+		width: 60px;
+		height: 60px;
+		background-color: #1e566f;
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+		cursor: pointer;
+		transition: all 0.3s ease;
+		text-decoration: none;
+		z-index: 9999;
+	}
+
+	.floating-call-icon:hover {
+		background-color: #164354;
+		transform: scale(1.1);
+		box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+	}
+
+	.floating-call-icon i {
+		color: #fff;
+		font-size: 28px;
+	}
+
+	/* Adjust WhatsApp widget position to be below call icon and match size */
+	#wh-widget-send-button {
+		right: 20px !important;
+		left: auto !important;
+		bottom: 20px !important;
+		position: fixed !important;
+		z-index: 9998 !important;
+		width: 40px !important;
+		height: 40px !important;
+	}
+	
+	/* Ensure WhatsApp button is properly positioned below call icon */
+	body #wh-widget-send-button {
+		right: 20px !important;
+		left: auto !important;
+		bottom: 20px !important;
+		width: 60px !important;
+		height: 60px !important;
+	}
+	
+	/* Match WhatsApp button image size */
+	#wh-widget-send-button img,
+	#wh-widget-send-button svg {
+		width: 60px !important;
+		height: 60px !important;
+	}
+</style>
+
+<a href="tel:+918855815433" class="floating-call-icon" title="Call Us">
+	<i class="fa fa-phone" aria-hidden="true"></i>
+</a>
+
+<!-- WhatsApp Widget Script -->
+<script type="text/javascript">
+	(function () {
+		var options = {
+			whatsapp: "918855815433", // WhatsApp number
+			call_to_action: "Message us", // Call to action
+			position: "right", // Position changed to 'right'
+		};
+		var proto = document.location.protocol,
+			host = "getbutton.io",
+			url = proto + "//static." + host;
+		var s = document.createElement('script');
+		s.type = 'text/javascript';
+		s.async = true;
+		s.src = url + '/widget-send-button/js/init.js';
+		s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
+		var x = document.getElementsByTagName('script')[0];
+		x.parentNode.insertBefore(s, x);
+	})();
+</script>
 

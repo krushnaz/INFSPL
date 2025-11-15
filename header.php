@@ -79,7 +79,7 @@ if (!isset($conn)) {
 								while ($row_cat = $result_cat->fetch_assoc()) {
 									$id1 = $row_cat['id'];
 									$name = $row_cat['name'];
-									echo "<li><a href='service-starup.php?id=$id1'>$name</a></li>";
+									echo "<li><a href='services.php?id=$id1'>$name</a></li>";
 								}
 							} else {
 								echo "0 results";

@@ -119,7 +119,7 @@ $img_path = 'https://infspl.com/development/assets/front/img/';
 
 										$name = $row_cat['name'];
 
-										echo "<li><a href='service-starup.php?id=$id1'>$name</a></li>";
+										echo "<li><a href='services.php?id=$id1'>$name</a></li>";
 
 
 									}
@@ -265,9 +265,9 @@ $img_path = 'https://infspl.com/development/assets/front/img/';
 							<h5 class="wgs-title">Our Services</h5>
 							<div class="wgs-content">
 								<ul class="menu">
-									<li><a href="service-starup.php?id=59">Startup</a></li>
-									<li><a href="service-starup.php?id=60">MSME</a></li>
-									<li><a href="service-starup.php?id=61">Large Enterprise</a></li>
+									<li><a href="services.php?id=59">Startup</a></li>
+									<li><a href="services.php?id=60">MSME</a></li>
+									<li><a href="services.php?id=61">Large Enterprise</a></li>
 
 								</ul>
 							</div>

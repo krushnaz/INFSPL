@@ -292,7 +292,7 @@ $result_test = $conn->query($sql_test);
 							echo " <div class='col-md-4 col-sm-6 col-xs-6 $everOrOdd' style='padding: 10px;'>
 							<!-- Feature box -->
 							<div class='feature'>
-								<a href='service-starup.php?id=$id'>
+								<a href='services.php?id=$id'>
 									<div class='fbox-photo'>
 										<img src=image/IMAGE$serial_number.jpg alt=''>
 									</div>
@@ -767,25 +767,6 @@ $result_test = $conn->query($sql_test);
 		<img alt="" src="image/slider-lg-b.jpg">
 	</div>
 	<!-- End -->
-	<script type="text/javascript">
-		(function () {
-			var options = {
-				whatsapp: "918855815433", // WhatsApp number
-				call_to_action: "Message us", // Call to action
-				position: "left", // Position may be 'right' or 'left'
-			};
-			var proto = document.location.protocol,
-				host = "getbutton.io",
-				url = proto + "//static." + host;
-			var s = document.createElement('script');
-			s.type = 'text/javascript';
-			s.async = true;
-			s.src = url + '/widget-send-button/js/init.js';
-			s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
-			var x = document.getElementsByTagName('script')[0];
-			x.parentNode.insertBefore(s, x);
-		})();
-	</script>
 
 	<!-- Preloader !active please if you want -->
 	<!-- <div id="preloader"><div id="status">&nbsp;</div></div> -->

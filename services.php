@@ -157,7 +157,7 @@ if ($result_services->num_rows > 0) {
             $oddOrEven = 'odd';
         }
 
-        $url = 'startup-virtual-cfo.php?id=' . $service_id . '&cat_id=' . $id_cat;
+        $url = 'service.php?id=' . $service_id . '&cat_id=' . $id_cat;
 
         echo "
         <div class='col-md-4 col-sm-6 $oddOrEven'>

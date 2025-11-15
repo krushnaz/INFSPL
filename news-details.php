@@ -132,7 +132,7 @@ if ($result_blogs->num_rows > 0) {
 						<li class="dropdown">
 							<a href="service.html" class="dropdown-toggle">Services <b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="service-starup.php">StartUp</a></li>
+								<li><a href="services.php">StartUp</a></li>
 								<li><a href="service-msme.html">MSME</a></li>
 								<li><a href="service-large.html">Large Enterprise</a></li>
 							</ul>
@@ -249,9 +249,9 @@ if ($result_blogs->num_rows > 0) {
 							<h5 class="wgs-title">Our Services</h5>
 							<div class="wgs-content">
 								<ul class="menu">
-									<li><a href="service-starup.php?id=59">Startup</a></li>
-									<li><a href="service-starup.php?id=60">MSME</a></li>
-									<li><a href="service-starup.php?id=61">Large Enterprise</a></li>
+									<li><a href="services.php?id=59">Startup</a></li>
+									<li><a href="services.php?id=60">MSME</a></li>
+									<li><a href="services.php?id=61">Large Enterprise</a></li>
 
 								</ul>
 							</div>
